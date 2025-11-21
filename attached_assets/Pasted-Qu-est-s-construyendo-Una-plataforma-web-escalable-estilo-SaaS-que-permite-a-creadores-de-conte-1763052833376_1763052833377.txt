@@ -1,0 +1,71 @@
+Qué estás construyendo: "Una plataforma web escalable (estilo SaaS) que permite a creadores de contenido alojar, gestionar y distribuir múltiples podcasts, y a los oyentes descubrir, suscribirse y escuchar contenido."
+
+Problema a resolver: "Democratizar la creación y distribución de podcasts, ofreciendo herramientas potentes para creadores y una experiencia de usuario fluida para oyentes, todo en una sola plataforma."
+
+Público objetivo: Creadores de podcast (desde amateurs hasta redes de podcasts profesionales) y oyentes de podcasts.
+
+2. Roles de Usuario y Permisos (La parte "Multi-Usuario")
+Esto es fundamental. Define quién puede hacer qué.
+
+Rol 1: Oyente (Usuario Registrado/Anónimo)
+
+Anónimo: Buscar, descubrir y reproducir episodios.
+
+Registrado: Suscribirse a podcasts, crear playlists, descargar episodios (para app móvil), comentar, valorar, seguir a creadores.
+
+Rol 2: Creador de Podcast (Host)
+
+Crear y gestionar múltiples perfiles de podcast (shows).
+
+Para cada podcast: subir episodios (audio/video), editar metadatos (título, descripción, arte de portada, notas del episodio).
+
+Generar y gestionar el feed RSS (¡crítico!).
+
+Ver analíticas detalladas (descargas, geografía de oyentes, retención).
+
+Gestionar colaboradores (invitar a co-hosts, editores a su podcast específico).
+
+Rol 3: Administrador de la Plataforma (Super Admin)
+
+Gestionar todos los usuarios y creadores.
+
+Moderar contenido (aprobar/rechazar podcasts, eliminar episodios).
+
+Gestionar categorías de la plataforma.
+
+Ver analíticas globales del sitio.
+
+Gestionar planes de suscripción (si aplica).
+
+3. Características Principales (Desglosadas por Módulo)
+Módulo de Oyente (El "Player")
+
+Descubrimiento: Página de inicio con "Destacados", "Tendencias", "Nuevos Lanzamientos".
+
+Búsqueda: Búsqueda potente por título de podcast, episodio, creador o categoría.
+
+Reproductor: Reproductor de audio persistente (que sigue sonando mientras navegas), control de velocidad, temporizador de apagado (sleep timer), cola de reproducción.
+
+Biblioteca Personal: "Mis Suscripciones", "Mis Playlists", "Episodios Descargados".
+
+Módulo de Creador (El "Dashboard")
+
+Gestión de Múltiples Podcasts: Un dashboard central para ver todos los "shows" que posee el creador.
+
+Publicación de Episodios: Formulario para subir archivos (MP3, M4A, etc.), programar publicación, añadir notas del episodio (rich text), marcar como explícito.
+
+Distribución (Clave): Generación automática de un feed RSS compatible con Apple Podcasts, Spotify, Google Podcasts. Debe incluir una forma de enviar a estos directorios.
+
+Analíticas: Panel de control con estadísticas de descargas por episodio, por día/semana/mes, principales países, y aplicaciones de escucha.
+
+Módulo de Comunidad y Monetización
+
+Comunidad: Sistema de comentarios por episodio, perfiles de usuario, valoraciones (reviews) de podcasts.
+
+Monetización (Opcional, pero importante definirlo):
+
+¿Habrá planes para creadores (p.ej., Básico, Pro) basados en horas de subida o almacenamiento?
+
+¿Habrá suscripciones "Premium" para oyentes (acceso a contenido exclusivo, sin anuncios)?
+
+¿Soporte para donaciones?

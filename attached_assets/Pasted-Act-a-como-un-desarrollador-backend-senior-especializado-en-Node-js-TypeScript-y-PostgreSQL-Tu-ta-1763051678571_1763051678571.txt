@@ -1,0 +1,113 @@
+Actúa como un desarrollador backend senior especializado en Node.js, TypeScript y PostgreSQL.
+
+Tu tarea es generar la estructura inicial (scaffolding) completa para una plataforma de podcasts multitenant.
+
+Utiliza el siguiente stack tecnológico:
+
+Backend: Node.js con Express y TypeScript.
+
+Base de Datos: PostgreSQL.
+
+ORM: Prisma (es ideal para esto).
+
+Servidor de Desarrollo: ts-node-dev para recarga en caliente.
+
+Por favor, genera el contenido de los siguientes archivos:
+
+1. package.json
+
+Genera un package.json que incluya estas dependencias:
+
+dependencies: express, pg, @prisma/client, dotenv.
+
+devDependencies: @types/express, @types/node, prisma, ts-node-dev, typescript.
+
+Incluye un script dev para iniciar el servidor con ts-node-dev src/index.ts.
+
+Incluye un script build para compilar con tsc.
+
+2. tsconfig.json
+
+Genera un archivo tsconfig.json estándar para un proyecto de Node.js/Express. Asegúrate de que esModuleInterop esté en true y el outDir sea ./dist.
+
+3. prisma/schema.prisma
+
+Este es el archivo más importante. Define el esquema de la base de datos para PostgreSQL.
+
+Modelo User:
+
+id (UUID, default uuid()).
+
+email (String, @unique).
+
+role (Enum UserRole: LISTENER o CREATOR, default LISTENER).
+
+podcasts (Relación uno-a-muchos con Podcast).
+
+Modelo Podcast:
+
+id (UUID, default uuid()).
+
+title (String).
+
+description (String).
+
+coverArtUrl (String).
+
+ownerId (Relación con User).
+
+owner (Relación con User).
+
+episodes (Relación uno-a-muchos con Episode).
+
+Modelo Episode:
+
+id (UUID, default uuid()).
+
+title (String).
+
+notes (String, tipo Text).
+
+audioUrl (String) - Esta será la URL al archivo de audio (p.ej., en S3).
+
+publishedAt (DateTime, default now()).
+
+podcastId (Relación con Podcast).
+
+podcast (Relación con Podcast).
+
+4. src/index.ts (Servidor Principal)
+
+Genera el archivo principal del servidor Express en TypeScript.
+
+Importa Express y PrismaClient.
+
+Inicializa PrismaClient y Express.
+
+Añade el middleware express.json().
+
+Ruta de ejemplo (API): GET /podcast/:id/episodes que devuelva los episodios de un podcast (simulado, no necesitas la lógica de DB aún).
+
+Ruta de Incrustado (Embed):
+
+Crea una ruta: GET /embed/episode/:id
+
+Esta ruta NO debe devolver JSON.
+
+Debe devolver una cadena de texto HTML que contenga un <iframe> o un reproductor de audio HTML5 básico.
+
+(Simula la búsqueda del episodio, p.ej., const episode = { title: "Mi Episodio", audioUrl: "..." }).
+
+El HTML debe ser algo como: res.send('<html><body><h2>${episode.title}</h2><audio controls src="${episode.audioUrl}"></audio></body></html>');
+
+Inicia el servidor en el puerto 3000.
+
+5. .env (Instrucción)
+
+Indícame que debo crear un archivo .env (o usar los "Secrets" de Replit) con la variable DATABASE_URL para mi conexión a PostgreSQL.
+
+Ejemplo: DATABASE_URL="postgresql://user:password@host:port/database"
+
+6. .replit (Configuración de Replit)
+
+Genera un archivo .replit que use el script dev del package.json como comando de run.

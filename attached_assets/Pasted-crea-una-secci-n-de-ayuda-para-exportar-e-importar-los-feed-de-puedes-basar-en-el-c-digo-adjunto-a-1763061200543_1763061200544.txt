@@ -1,0 +1,221 @@
+crea una sección de ayuda para exportar e importar los feed, de puedes basar en el código adjunto, adaptando la imagen colores y logos <!DOCTYPE html>
+<html lang="es" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-R-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Interactivo para Publicar Podcasts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+        html { font-family: 'Inter', sans-serif; }
+        /* Estilo para el botón de navegación activo */
+        .nav-button.active {
+            background-color: #4f46e5; /* indigo-600 */
+            color: white;
+        }
+    </style>
+</head>
+<body class="h-full p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-lg overflow:hidden- flex flex-col md:flex-row min-h-[70vh]">
+        <!-- Columna de Navegación -->
+        <nav class="w-full md:w-1/3 lg:w-1/4 bg-gray-800 p-4 space-y-2">
+            <h2 class="text-white text-xl font-bold mb-4 px-2">Plataformas</h2>
+            <div id="nav-container" class="space-y-1">
+                <!-- Los botones de navegación se insertarán aquí dinámicamente -->
+            </div>
+        </nav>
+
+        <!-- Área de Contenido -->
+        <main class="w-full md:w-2/3 lg:w-3/4 p-6 md:p-10 overflow-y-auto">
+            <header class="mb-6">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Manual Interactivo de Publicación</h1>
+                <p class="text-gray-600">Sigue estos pasos para enviar tu podcast a las principales plataformas.</p>
+            </header>
+            
+            <!-- Input del RSS Feed -->
+            <div class="mb-6">
+                <label for="rss-feed" class="block text-sm font-medium text-gray-700 mb-2">Pega tu Feed RSS aquí:</label>
+                <input type="url" id="rss-feed" placeholder="https://tu-plataforma.com/rss/mi-podcast" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            
+            <!-- Contenido Dinámico -->
+            <div id="content-container">
+                <!-- El contenido del servicio seleccionado se insertará aquí -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        // --- Base de Datos de Servicios ---
+        const services = {
+            'spotify': {
+                name: "Spotify",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.16 17.4c-.2.3-.5.4-.8.2-2.3-1.4-5.2-1.7-8.7-.9-.3 0-.6-.2-.7-.5s.2-.6.5-.7c3.8-.8 7.1-.5 9.7 1.1.3.2.4.6.2.8zm1.5-2.2c-.2.3-.6.4-1 .2-2.6-1.6-6.4-2.1-9.4-1.1-.4 0-.7-.3-.8-.7s.3-.7.7-.8c3.4-1.1 7.7-.5 10.6 1.3.4.2.5.7.2 1zm.1-2.4c-3-1.8-8-2.3-11-1.3-.4.1-.9-.2-1-.6-.1-.4.2-.9.6-1C7.6 9.1 13 9.6 16.5 11.7c.4.2.6.8.3 1.2-.2.4-.8.6-1.2.3z"/></svg>`,
+                submitUrl: "https://podcasters.spotify.com/submit",
+                steps: [
+                    "Ve a 'Spotify for Podcasters' y regístrate o inicia sesión.",
+                    "Haz clic en 'Empezar' o 'Añadir tu podcast'.",
+                    "Pega tu feed RSS en el campo correspondiente.",
+                    "Verifica que eres el propietario del podcast (generalmente con un código enviado a tu email).",
+                    "Revisa la información (país, categoría) y envía.",
+                    "La aprobación puede tardar desde unas horas hasta unos días.",
+                    "[Haz clic aquí para ir a Spotify for Podcasters](${services.spotify.submitUrl}?rss=${rssValue})"
+                ]
+            },
+            'youtube': {
+                name: "YouTube Music",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM12 16.1c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1 4.1 1.8 4.1 4.1-1.8 4.1-4.1 4.1z"/><path d="M19.1 11.5c-.2-.6-.9-1.3-1.7-1.4-.7-.1-3.6-.1-5.4-.1s-4.7 0-5.4.1c-.8.1-1.5.8-1.7 1.4-.1.7-.1 3.2-.1 3.2s0 2.5.1 3.2c.2.6.9 1.3 1.7 1.4.7.1 3.6.1 5.4.1s4.7 0 5.4-.1c.8-.1 1.5-.8 1.7-1.4.1-.7.1-3.2.1-3.2s0-2.5-.1-3.2zM9.8 15.6V12l3.4 1.8-3.4 1.8z"/></svg>`,
+                submitUrl: "https://studio.youtube.com/podcast",
+                info: "Nota: Google Podcasts se está moviendo a YouTube Music. Ahora debes subir tu podcast a través de YouTube Studio.",
+                steps: [
+                    "Ve a YouTube Studio (necesitarás un canal de YouTube).",
+                    "Haz clic en 'Crear' y luego en 'Nuevo podcast'.",
+                    "Selecciona 'Enviar feed RSS'.",
+                    "Pega la URL de tu feed RSS y haz clic en 'Siguiente'.",
+                    "Revisa los episodios y haz clic en 'Publicar'.",
+                    "Tu podcast aparecerá en YouTube Music y en tu canal de YouTube.",
+                    "[Haz clic aquí para ir a YouTube Studio](${services.youtube.submitUrl})"
+                ]
+            },
+            'pocketcasts': {
+                name: "Pocket Casts",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.8 3H5.2C3.98 3 3 3.98 3 5.2v13.6C3 20.02 3.98 21 5.2 21h13.6c1.22 0 2.2-0.98 2.2-2.2V5.2C21 3.98 20.02 3 18.8 3zM9.1 16.3c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1 4.1 1.8 4.1 4.1-1.9 4.1-4.1 4.1zm5.8 0c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1 4.1 1.8 4.1 4.1-1.8 4.1-4.1 4.1z"/></svg>`,
+                submitUrl: "https://www.pocketcasts.com/submit",
+                steps: [
+                    "Visita la página de envío de Pocket Casts.",
+                    "Pega tu feed RSS en el campo.",
+                    "Haz clic en 'Submit'.",
+                    "Pocket Casts revisará el feed y lo añadirá al directorio.",
+                    "Es uno de los procesos más rápidos y sencillos.",
+                    "[Haz clic aquí para ir a Pocket Casts Submit](${services.pocketcasts.submitUrl}?url=${rssValue})"
+                ]
+            },
+            'castbox': {
+                name: "Castbox",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3.2 12.3c0-4.9 3.9-8.8 8.8-8.8s8.8 3.9 8.8 8.8-3.9 8.8-8.8 8.8-8.8-3.9-8.8-8.8zm15.4 0c0-3.6-2.9-6.5-6.5-6.5s-6.5 2.9-6.5 6.5 2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5zM12 9.2c-1.6 0-2.8 1.3-2.8 2.8s1.3 2.8 2.8 2.8 2.8-1.3 2.8-2.8-1.2-2.8-2.8-2.8z"/></svg>`,
+                submitUrl: "https://castbox.fm/creator/submit",
+                steps: [
+                    "Visita el 'Creator Studio' de Castbox.",
+                    "Inicia sesión o regístrate.",
+                    "Haz clic en 'Reclamar la propiedad de un podcast'.",
+                    "Pega tu feed RSS y haz clic en 'Enviar'.",
+                    "Deberás verificar la propiedad, normalmente vía email.",
+                    "Una vez verificado, tu podcast se añadirá.",
+                    "[Haz clic aquí para ir a Castbox Creator](${services.castbox.submitUrl})"
+                ]
+            },
+            'ivoox': {
+                name: "iVoox",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.9c-3.8 0-6.9-3.1-6.9-6.9s3.1-6.9 6.9-6.9 6.9 3.1 6.9 6.9-3.1 6.9-6.9 6.9z"/><path d="M12 7.5c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm0 6.8c-1.3 0-2.3-1-2.3-2.3s1-2.3 2.3-2.3 2.3 1 2.3 2.3-1 2.3-2.3 2.3z"/></svg>`,
+                submitUrl: "https://www.ivoox.com/feed-submit.html",
+                info: "iVoox es especialmente importante para el público de habla hispana.",
+                steps: [
+                    "Inicia sesión en tu cuenta de iVoox (o crea una).",
+                    "Ve a la sección 'Subir' o 'Publicar'.",
+                    "Busca la opción para 'Importar desde un feed RSS'.",
+                    "Pega tu URL de RSS y sigue las instrucciones.",
+                    "iVoox importará tus episodios y los publicará.",
+                    "[Haz clic aquí para ir a iVoox Submit](${services.ivoox.submitUrl}?url=${rssValue})"
+                ]
+            },
+            'podcastaddict': {
+                name: "Podcast Addict",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 15v-4H8l4-5 4 5h-3v4h-2z"/></svg>`,
+                submitUrl: "https://podcastaddict.com/submit",
+                steps: [
+                    "Visita la página de envío de Podcast Addict.",
+                    "Pega la URL de tu feed RSS en el campo.",
+                    "Haz clic en 'Submit podcast'.",
+                    "La plataforma comprobará tu feed y, si es válido, lo añadirá al directorio.",
+                    "Suele ser un proceso bastante rápido.",
+                    "[Haz clic aquí para ir a Podcast Addict Submit](${services.podcastaddict.submitUrl}?rss=${rssValue})"
+                ]
+            },
+        };
+
+        const navContainer = document.getElementById('nav-container');
+        const contentContainer = document.getElementById('content-container');
+        const rssInput = document.getElementById('rss-feed');
+
+        let selectedService = 'spotify'; // Servicio por defecto
+
+        // --- Renderizar Navegación ---
+        function renderNav() {
+            navContainer.innerHTML = ''; // Limpiar
+            Object.keys(services).forEach(key => {
+                const service = services[key];
+                const button = document.createElement('button');
+                button.className = `nav-button w-full flex items-center space-x-3 p-2 rounded-md text-gray-300 hover:bg-indigo-500 hover:text-white transition-colors duration-150`;
+                if (key === selectedService) {
+                    button.classList.add('active');
+                }
+                button.innerHTML = `${service.icon} <span>${service.name}</span>`;
+                button.onclick = () => {
+                    selectedService = key;
+                    renderNav(); // Re-renderizar nav para estado activo
+                    renderContent(); // Renderizar contenido
+                };
+                navContainer.appendChild(button);
+            });
+        }
+
+        // --- Renderizar Contenido ---
+        function renderContent() {
+            const service = services[selectedService];
+            if (!service) {
+                contentContainer.innerHTML = '<p>Selecciona un servicio de la lista.</p>';
+                return;
+            }
+
+            const rssValue = encodeURIComponent(rssInput.value);
+
+            // Procesar los pasos para incluir enlaces dinámicos
+            const stepsHtml = service.steps.map(step => {
+                // Reemplaza [texto del enlace](url) con un <a>
+                const linkMatch = step.match(/\[(.*?)\]\((.*?)\)/);
+                if (linkMatch) {
+                    let url = linkMatch[2];
+                    // Reemplaza las variables en la URL
+                    url = url.replace(/\$\{(.*?)\}/g, (match, p1) => {
+                        try {
+                            return eval(p1); // Evalúa variables como 'rssValue'
+                        } catch (e) {
+                            return '';
+                        }
+                    });
+                    
+                    const text = linkMatch[1];
+                    const processedStep = step.replace(linkMatch[0], `<a href="${url}" target="_blank" class="text-indigo-600 font-medium hover:underline">${text}</a>`);
+                    return `<li class="pb-2 mb-2 border-b border-gray-200">${processedStep}</li>`;
+                }
+                return `<li class="pb-2 mb-2 border-b border-gray-200">${step}</li>`;
+            }).join('');
+            
+            // Renderizar nota informativa si existe
+            const infoHtml = service.info ? `<div class="p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-md mb-4">${service.info}</div>` : '';
+
+            contentContainer.innerHTML = `
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="text-gray-900">${service.icon.replace('class="w-6 h-6"', 'class="w-10 h-10"')}</span>
+                    <h2 class="text-2xl font-bold text-gray-900">${service.name}</h2>
+                </div>
+                ${infoHtml}
+                <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                    ${stepsHtml}
+                </ol>
+            `;
+        }
+
+        // --- Inicialización ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNav();
+            renderContent();
+
+            // Actualizar contenido si cambia el RSS (para los enlaces dinámicos)
+            rssInput.addEventListener('input', renderContent);
+        });
+
+    </script>
+</body>
+</html>
